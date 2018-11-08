@@ -1,0 +1,23 @@
+.photos {
+  padding: 30px;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__title {
+    font-family: Roboto;
+  }
+
+  &__info {
+    @include gradientBg(#efefef, #e2e2e2);
+    padding: 30px;
+    min-height: 294px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+  }
+
+}

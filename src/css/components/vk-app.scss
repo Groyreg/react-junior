@@ -1,0 +1,17 @@
+.vk-app {
+  &__header {
+    @include gradientBg(#69b8f4, #1a52b2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    min-height: 60px;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 0;
+    color: #2b2b2b;
+    font-family: Roboto;
+  }
+}
