@@ -5,11 +5,30 @@ export class Page extends React.Component {
   onBtnClick = e => {
     const year = parseInt(e.currentTarget.innerText)
 
-      this.props.getPhotos(year)
+    this.props.getPhotos(year)
   }
-  render() {
-      const { year, photos, isFetching } = this.props
 
+  renderTemplate = () => {
+    const { photos, isFetching, error } = this.props
+
+    if (error) {
+      return <p className="error">Во время загрузки фото произошла ошибка</p>
+    }
+
+    if (isFetching) {
+      return <div className="loader">Загружаю...</div>
+    } else {
+      return photos.map((entry, index) => (
+        <div key={index} className="photos__item">
+          <img src={entry.sizes[0].url} alt="" />
+          <p>{entry.likes.count} ❤</p>
+        </div>
+      ))
+    }
+  }
+
+  render() {
+    const { year } = this.props
     return (
       <section className="photos">
         <header className="photos__header">
@@ -31,10 +50,7 @@ export class Page extends React.Component {
         </header>
         <section className="photos__section">
           <h2 className="photos__title">{year} год</h2>
-          <div className="photos__info">
-              {isFetching ? <div className="loader">Загружаю...</div> : <p>У тебя {photos.length} фото.</p>}
-          </div>
-          <div className="photos__content" />
+          <div className="photos__info">{this.renderTemplate()}</div>
         </section>
       </section>
     )
@@ -42,8 +58,8 @@ export class Page extends React.Component {
 }
 
 Page.propTypes = {
-    year: PropTypes.number.isRequired,
-    photos: PropTypes.array.isRequired,
-    getPhotos: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool.isRequired,
+  year: PropTypes.number.isRequired,
+  photos: PropTypes.array.isRequired,
+  getPhotos: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 }

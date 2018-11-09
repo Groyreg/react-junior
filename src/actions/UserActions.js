@@ -9,7 +9,7 @@ export function handleLogin() {
     //eslint-disable-next-line no-undef
     VK.Auth.login(r => {
       if (r.session) {
-        let username = r.session.user.first_name
+        let username = r.session.user.first_name + ' ' + r.session.user.last_name
 
         dispatch({
           type: LOGIN_SUCCESS,
